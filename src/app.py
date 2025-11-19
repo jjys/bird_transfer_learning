@@ -5,11 +5,15 @@
 
 import streamlit as st
 import tensorflow as tf
-from tensorflow import keras
+try:
+    # TensorFlow 2.20+ 使用 keras 3
+    import keras
+except ImportError:
+    # 舊版 TensorFlow 使用 tensorflow.keras
+    from tensorflow import keras
 from PIL import Image
 import numpy as np
 import os
-import requests
 from io import BytesIO
 
 # 設定頁面配置

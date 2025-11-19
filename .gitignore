@@ -50,3 +50,4 @@ data/validation/
 
 # Streamlit
 .streamlit/secrets.toml
+# 但保留 config.toml 用於部署
