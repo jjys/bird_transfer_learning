@@ -28,8 +28,8 @@ wheels/
 *.ipynb_checkpoints
 
 # 模型和資料
-models/*.h5
-models/*.keras
+# models/*.h5  # 允許模型檔案推送到 Git 用於 Streamlit Cloud 部署
+# models/*.keras  # 允許模型檔案推送到 Git 用於 Streamlit Cloud 部署
 data/train/
 data/test/
 data/validation/

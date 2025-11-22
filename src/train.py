@@ -3,6 +3,10 @@
 使用遷移式學習訓練模型
 """
 
+# Fix for Python 3.12 distutils issue with TensorFlow 2.16.2
+import setuptools
+import distutils
+
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.applications import MobileNetV2
@@ -18,9 +22,9 @@ TRAIN_DIR = 'data/train'
 TEST_DIR = 'data/test'
 MODEL_SAVE_PATH = 'models/bird_classifier.keras'
 IMG_SIZE = 224
-BATCH_SIZE = 8  # Reduced for small dataset
-EPOCHS = 50  # Increased for better convergence
-LEARNING_RATE = 0.0001
+BATCH_SIZE = 4  # Further reduced for very small dataset
+EPOCHS = 100  # Increased with early stopping protection
+LEARNING_RATE = 0.0005  # Slightly higher initial LR
 NUM_CLASSES = 3
 
 print("=" * 60)
@@ -90,7 +94,7 @@ base_model.trainable = False
 inputs = keras.Input(shape=(IMG_SIZE, IMG_SIZE, 3))
 x = base_model(inputs, training=False)
 x = GlobalAveragePooling2D()(x)
-x = Dense(256, activation='relu')(x)
+x = Dense(512, activation='relu')(x)
 x = Dropout(0.5)(x)
 outputs = Dense(NUM_CLASSES, activation='softmax')(x)
 
@@ -112,7 +116,7 @@ print()
 callbacks = [
     keras.callbacks.EarlyStopping(
         monitor='val_loss',
-        patience=5,
+        patience=10,  # More patience for 100 epochs
         restore_best_weights=True
     ),
     keras.callbacks.ReduceLROnPlateau(
