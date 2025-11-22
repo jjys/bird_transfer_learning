@@ -14,12 +14,12 @@ import matplotlib.pyplot as plt
 import os
 
 # 設定參數
-TRAIN_DIR = '../data/train'
-TEST_DIR = '../data/test'
-MODEL_SAVE_PATH = '../models/bird_classifier.keras'
+TRAIN_DIR = 'data/train'
+TEST_DIR = 'data/test'
+MODEL_SAVE_PATH = 'models/bird_classifier.keras'
 IMG_SIZE = 224
-BATCH_SIZE = 32
-EPOCHS = 20
+BATCH_SIZE = 8  # Reduced for small dataset
+EPOCHS = 50  # Increased for better convergence
 LEARNING_RATE = 0.0001
 NUM_CLASSES = 3
 
@@ -189,7 +189,7 @@ plt.legend()
 plt.grid(True)
 
 plt.tight_layout()
-plot_path = '../models/training_history.png'
+plot_path = 'models/training_history.png'
 plt.savefig(plot_path)
 print(f"訓練曲線已儲存至: {plot_path}")
 

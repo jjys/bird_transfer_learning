@@ -1,6 +1,8 @@
 streamlit>=1.30.0
-tensorflow>=2.20.0
+tensorflow==2.16.2
+tensorflow-metal==1.2.0
 pillow>=10.0.0
-numpy>=1.24.0
+numpy<2.0.0
 matplotlib>=3.8.0
 pandas>=2.1.0
+setuptools<70

@@ -3,6 +3,10 @@
 使用遷移式學習識別台灣常見八哥科鳥類
 """
 
+# Fix for Python 3.12 distutils issue
+import setuptools
+import distutils
+
 import streamlit as st
 import tensorflow as tf
 try:
