@@ -72,11 +72,15 @@ st.markdown("""
 @st.cache_resource
 def load_model():
     """載入訓練好的模型"""
-    model_path = '../models/bird_classifier.keras'
+    # 取得當前檔案的目錄
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # 建立模型檔案的絕對路徑
+    model_dir = os.path.join(os.path.dirname(current_dir), 'models')
+    model_path = os.path.join(model_dir, 'bird_classifier.keras')
     
     # 如果模型不存在，嘗試載入 H5 格式
     if not os.path.exists(model_path):
-        model_path = '../models/bird_classifier.h5'
+        model_path = os.path.join(model_dir, 'bird_classifier.h5')
     
     if os.path.exists(model_path):
         try:
@@ -85,7 +89,7 @@ def load_model():
         except Exception as e:
             return None, f"載入模型時發生錯誤: {str(e)}"
     else:
-        return None, "找不到模型檔案，請先訓練模型"
+        return None, f"找不到模型檔案，請先訓練模型。查找路徑: {model_path}"
 
 
 def preprocess_image(image, target_size=(224, 224)):
